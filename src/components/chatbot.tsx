@@ -27,13 +27,17 @@ export default function Chatbot() {
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (scrollAreaRef.current) {
-        const viewport = scrollAreaRef.current.querySelector('div');
-        if (viewport) {
+    if (isOpen) {
+      setTimeout(() => {
+        if (scrollAreaRef.current) {
+          const viewport = scrollAreaRef.current.querySelector('div');
+          if (viewport) {
             viewport.scrollTop = viewport.scrollHeight;
+          }
         }
+      }, 100);
     }
-  }, [messages]);
+  }, [messages, isOpen]);
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -72,7 +76,6 @@ export default function Chatbot() {
             setTimeout(() => {
                 element.style.boxShadow = '';
             }, 2000);
-            setIsOpen(false);
           }
         }
       }
