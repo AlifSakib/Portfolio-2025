@@ -71,7 +71,7 @@ export default function Footer() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.3 }}
-            className="fixed bottom-5 right-5 z-50"
+            className="fixed bottom-5 right-24 z-40"
           >
             <Button
               onClick={scrollToTop}
