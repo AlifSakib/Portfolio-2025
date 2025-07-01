@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "./ui/button";
+import { ThemeToggle } from "./theme-toggle";
 
 const navLinks = [
   { name: "About", href: "#about" },
@@ -47,18 +48,22 @@ export default function Header() {
             Alif Sakib
           </Link>
 
-          <nav className="hidden md:flex space-x-8">
-            {navLinks.map((link) => (
-              <a key={link.name} href={link.href} className="text-foreground hover:text-primary transition-colors duration-300 font-medium">
-                {link.name}
-              </a>
-            ))}
-          </nav>
+          <div className="flex items-center gap-4">
+            <nav className="hidden md:flex space-x-8">
+              {navLinks.map((link) => (
+                <a key={link.name} href={link.href} className="text-foreground hover:text-primary transition-colors duration-300 font-medium">
+                  {link.name}
+                </a>
+              ))}
+            </nav>
+            
+            <ThemeToggle />
 
-          <div className="md:hidden">
-            <Button onClick={toggleMenu} variant="ghost" size="icon">
-              <Menu className="h-6 w-6" />
-            </Button>
+            <div className="md:hidden">
+              <Button onClick={toggleMenu} variant="ghost" size="icon">
+                <Menu className="h-6 w-6" />
+              </Button>
+            </div>
           </div>
         </div>
       </div>
