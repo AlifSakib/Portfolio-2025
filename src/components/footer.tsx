@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUp, Github, Linkedin, Twitter } from "lucide-react";
 import { Button } from "./ui/button";
+import VisitorCounter from "./visitor-counter";
 
 export default function Footer() {
   const [isVisible, setIsVisible] = useState(false);
@@ -40,9 +41,10 @@ export default function Footer() {
     <footer className="bg-secondary border-t mt-auto">
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} Alif Sakib. All rights reserved.
-          </p>
+          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+             <p>&copy; {new Date().getFullYear()} Alif Sakib. All rights reserved.</p>
+             <VisitorCounter />
+          </div>
           <div className="flex space-x-4">
             {socialLinks.map((social) => (
               <a
