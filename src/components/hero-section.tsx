@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { ArrowRight } from "lucide-react";
+import profilePic from "../../assets/profile/profile_pic.jpg"; // Adjust the path as necessary
 
 export default function HeroSection() {
   const containerVariants = {
@@ -66,7 +67,7 @@ export default function HeroSection() {
             <div className="relative w-72 h-72 md:w-96 md:h-96">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary to-accent rounded-full blur-2xl opacity-30"></div>
                 <Image
-                  src="https://placehold.co/400x400.png"
+                  src={profilePic}
                   alt="Alif Sakib - Professional Portrait"
                   width={400}
                   height={400}

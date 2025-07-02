@@ -9,7 +9,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
-import { submitContactForm } from "@/lib/actions";
 import { Github, Linkedin } from "lucide-react";
 
 const contactFormSchema = z.object({
@@ -33,21 +32,19 @@ export default function ContactSection() {
 
   async function onSubmit(data: ContactFormValues) {
     try {
-      const result = await submitContactForm(null, data);
-      if (result.message.includes("Thank you")) {
-        toast({
-          title: "Success!",
-          description: result.message,
-        });
-        form.reset();
-      } else {
-        // This part handles potential server-side validation errors not caught by client-side Zod.
-        toast({
-          title: "Error",
-          description: result.message,
-          variant: "destructive",
-        });
-      }
+      // Create mailto link for static deployment
+      const subject = encodeURIComponent(`Portfolio Contact from ${data.name}`);
+      const body = encodeURIComponent(`Name: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`);
+      const mailtoLink = `mailto:alifsakib@gmail.com?subject=${subject}&body=${body}`;
+      
+      // Open default email client
+      window.location.href = mailtoLink;
+      
+      toast({
+        title: "Email client opened!",
+        description: "Your default email client should open with the message pre-filled.",
+      });
+      form.reset();
     } catch (error) {
        toast({
         title: "Error",

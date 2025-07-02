@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { MessageSquare, Send, X, Bot, User, Loader2 } from "lucide-react";
-import { portfolioChat, PortfolioChatInput } from "@/ai/flows/portfolio-chat-flow";
 import { cn } from "@/lib/utils";
 
 type Message = {
@@ -14,12 +13,56 @@ type Message = {
   text: string;
 };
 
+// Simple client-side responses for static deployment
+const getSimpleResponse = (message: string): { response: string; navigationTarget?: string } => {
+  const lowercaseMessage = message.toLowerCase();
+  
+  if (lowercaseMessage.includes('about') || lowercaseMessage.includes('who are you')) {
+    return { 
+      response: "I can help you navigate Alif's portfolio. You can ask me about his experience, projects, or how to contact him. Click on different sections to explore!",
+      navigationTarget: "#about"
+    };
+  }
+  
+  if (lowercaseMessage.includes('experience') || lowercaseMessage.includes('work') || lowercaseMessage.includes('job')) {
+    return { 
+      response: "Alif has experience in full-stack development, particularly with React, Next.js, and modern web technologies. Check out the experience section for details!",
+      navigationTarget: "#experience"
+    };
+  }
+  
+  if (lowercaseMessage.includes('project') || lowercaseMessage.includes('portfolio')) {
+    return { 
+      response: "You can find Alif's projects in the portfolio section, showcasing various web applications and development work!",
+      navigationTarget: "#portfolio"
+    };
+  }
+  
+  if (lowercaseMessage.includes('contact') || lowercaseMessage.includes('reach') || lowercaseMessage.includes('email')) {
+    return { 
+      response: "You can contact Alif through the contact form below, or connect with him on LinkedIn and GitHub!",
+      navigationTarget: "#contact"
+    };
+  }
+  
+  if (lowercaseMessage.includes('skills') || lowercaseMessage.includes('technology') || lowercaseMessage.includes('tech')) {
+    return { 
+      response: "Alif works with React, Next.js, TypeScript, Node.js, and other modern web technologies. Check out the about section for more details!",
+      navigationTarget: "#about"
+    };
+  }
+  
+  return { 
+    response: "I can help you navigate this portfolio! Try asking about Alif's experience, projects, skills, or how to contact him."
+  };
+};
+
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "bot",
-      text: "Hi! I'm Alif's AI assistant. How can I help you navigate the portfolio?",
+      text: "Hi! I'm Alif's portfolio assistant. How can I help you navigate this portfolio?",
     },
   ]);
   const [inputValue, setInputValue] = useState("");
@@ -45,23 +88,15 @@ export default function Chatbot() {
 
     const userMessage: Message = { role: "user", text: inputValue };
     setMessages((prev) => [...prev, userMessage]);
+    const currentInput = inputValue;
     setInputValue("");
     setIsLoading(true);
 
-    try {
-      const chatHistory = messages.map(msg => ({
-        role: msg.role === 'bot' ? 'model' : 'user',
-        content: msg.text
-      }));
-
-      const input: PortfolioChatInput = {
-        message: inputValue,
-        history: chatHistory,
-      };
-      
-      const result = await portfolioChat(input);
-
-      if (result) {
+    // Simulate a brief delay for better UX
+    setTimeout(() => {
+      try {
+        const result = getSimpleResponse(currentInput);
+        
         const botMessage: Message = { role: "bot", text: result.response };
         setMessages((prev) => [...prev, botMessage]);
 
@@ -78,17 +113,17 @@ export default function Chatbot() {
             }, 2000);
           }
         }
+      } catch (error) {
+        console.error("Chatbot error:", error);
+        const errorMessage: Message = {
+          role: "bot",
+          text: "Sorry, I'm having a little trouble right now. Please try again later.",
+        };
+        setMessages((prev) => [...prev, errorMessage]);
+      } finally {
+        setIsLoading(false);
       }
-    } catch (error) {
-      console.error("Chatbot error:", error);
-      const errorMessage: Message = {
-        role: "bot",
-        text: "Sorry, I'm having a little trouble right now. Please try again later.",
-      };
-      setMessages((prev) => [...prev, errorMessage]);
-    } finally {
-      setIsLoading(false);
-    }
+    }, 500);
   };
 
   return (

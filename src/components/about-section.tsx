@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { GitFork, Box } from "lucide-react";
+import aboutMePic from "../../assets/profile/about_me.jpg"; // Adjust the path as necessary
 
 const JSIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg {...props} viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg"><rect width="128" height="128" fill="#f7df1e" rx="15"></rect><path d="m61.32 96.3c2.484 1.63 5.34 2.45 8.562 2.45 4.58 0 7.95-1.63 7.95-5.22 0-3.32-2.37-4.95-6.91-7.02l-3.37-1.52c-5.7-2.56-9.45-6.1-9.45-12.7 0-6.18 4.69-10.9 12.1-10.9 5.34 0 9.18 1.62 12.1 3.84l-5.7 7.4c-1.85-1.25-3.6-1.95-5.92-1.95-2.26 0-3.87.9-3.87 2.67 0 2.15 1.62 3.2 5.1 4.72l3.38 1.52c7.2 3.24 10.9 6.68 10.9 13.2 0 7.28-5.1 11.9-13.7 11.9-6.32 0-11.2-2.26-14.7-4.72z"></path><path d="m89.3 98.2c3.5 0 6.01-2.43 6.01-5.7v-35.3h10.4v35.4c0 9.34-6.89 14.8-16.4 14.8-8.16 0-14.1-5.02-16.1-12.4l9.04-3.66c1.2 4.09 4.3 6.32 7.05 6.32z"></path></svg>
@@ -88,7 +89,8 @@ export default function AboutSection() {
             >
               <div className="relative w-full aspect-square rounded-lg overflow-hidden shadow-xl">
                  <Image
-                   src="https://placehold.co/500x500.png"
+                   src={aboutMePic}
+                   priority
                    alt="Alif Sakib"
                    layout="fill"
                    objectFit="cover"
