@@ -13,8 +13,21 @@ export default function VisitorCounter() {
         const response = await fetch(
           "https://api.visitorbadge.io/api/id?path=alifsakib-portfolio"
         );
-        const data = await response.json();
-        setCount(data.value);
+        
+        if (!response.ok) {
+            throw new Error(`API request failed with status ${response.status}`);
+        }
+
+        const responseText = await response.text();
+        if (responseText) {
+            const data = JSON.parse(responseText);
+            setCount(data.value);
+        } else {
+            // If response is empty, we can't parse it.
+            // Set count to null to avoid breaking the UI.
+            setCount(null);
+        }
+
       } catch (error) {
         console.error("Failed to fetch visitor count:", error);
         setCount(null); // Or some fallback
