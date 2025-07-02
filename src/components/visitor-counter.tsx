@@ -15,8 +15,7 @@ export default function VisitorCounter() {
         );
         
         if (!response.ok) {
-            // Log the error instead of throwing, to avoid breaking the app on a non-critical feature.
-            console.error(`API request failed with status ${response.status}`);
+            // Silently fail if API is down
             setCount(null);
             return;
         }
@@ -28,15 +27,13 @@ export default function VisitorCounter() {
             const data = JSON.parse(responseText);
             setCount(data.total);
         } else {
-            // If response is empty or not JSON, we can't parse it.
-            // Log the issue and set count to null to avoid breaking the UI.
-            console.error("Received an invalid response from visitor API. Expected JSON.", { response: responseText });
+            // Silently fail if response is not JSON
             setCount(null);
         }
 
       } catch (error) {
-        console.error("Failed to fetch visitor count:", error);
-        setCount(null); // Or some fallback
+        // Silently fail on any other error, e.g. network issues
+        setCount(null);
       } finally {
         setLoading(false);
       }
