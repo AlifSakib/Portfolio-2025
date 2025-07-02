@@ -22,12 +22,15 @@ export default function VisitorCounter() {
         }
 
         const responseText = await response.text();
-        if (responseText) {
+        // The API sometimes returns an SVG instead of JSON.
+        // We need to check if the response is valid JSON before parsing.
+        if (responseText && responseText.trim().startsWith('{')) {
             const data = JSON.parse(responseText);
             setCount(data.total);
         } else {
-            // If response is empty, we can't parse it.
-            // Set count to null to avoid breaking the UI.
+            // If response is empty or not JSON, we can't parse it.
+            // Log the issue and set count to null to avoid breaking the UI.
+            console.error("Received an invalid response from visitor API. Expected JSON.", { response: responseText });
             setCount(null);
         }
 
