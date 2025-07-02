@@ -63,7 +63,7 @@ export default function ContactSection() {
     <section id="contact" className="py-20 lg:py-32 bg-card">
       <div className="container mx-auto px-4">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true, amount: 0.3 }}
@@ -76,7 +76,7 @@ export default function ContactSection() {
         </motion.div>
         <div className="grid lg:grid-cols-2 gap-12">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true, amount: 0.2 }}
@@ -130,7 +130,7 @@ export default function ContactSection() {
             </Form>
           </motion.div>
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true, amount: 0.2 }}

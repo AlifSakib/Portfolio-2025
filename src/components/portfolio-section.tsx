@@ -79,7 +79,7 @@ export default function PortfolioSection() {
     <section id="portfolio" className="py-20 lg:py-32">
       <div className="container mx-auto px-4">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true, amount: 0.3 }}
