@@ -15,7 +15,10 @@ export default function VisitorCounter() {
         );
         
         if (!response.ok) {
-            throw new Error(`API request failed with status ${response.status}`);
+            // Log the error instead of throwing, to avoid breaking the app on a non-critical feature.
+            console.error(`API request failed with status ${response.status}`);
+            setCount(null);
+            return;
         }
 
         const responseText = await response.text();
