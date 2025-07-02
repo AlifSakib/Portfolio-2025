@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUp, Github, Linkedin, Twitter } from "lucide-react";
+import { ArrowUp, Github, Linkedin } from "lucide-react";
 import { Button } from "./ui/button";
 import VisitorCounter from "./visitor-counter";
 
@@ -32,9 +32,8 @@ export default function Footer() {
   }, []);
 
   const socialLinks = [
-    { icon: Linkedin, href: "#", name: "LinkedIn" },
-    { icon: Github, href: "#", name: "GitHub" },
-    { icon: Twitter, href: "#", name: "Twitter" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/alifsakib/", name: "LinkedIn" },
+    { icon: Github, href: "https://github.com/AlifSakib", name: "GitHub" },
   ];
 
   return (

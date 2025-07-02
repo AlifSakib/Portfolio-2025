@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
 import { submitContactForm } from "@/lib/actions";
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { Github, Linkedin } from "lucide-react";
 
 const contactFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters."),
@@ -58,9 +58,8 @@ export default function ContactSection() {
   }
 
   const socialLinks = [
-    { icon: Linkedin, href: "#", name: "LinkedIn" },
-    { icon: Github, href: "#", name: "GitHub" },
-    { icon: Twitter, href: "#", name: "Twitter" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/alifsakib/", name: "LinkedIn" },
+    { icon: Github, href: "https://github.com/AlifSakib", name: "GitHub" },
   ];
 
   return (
@@ -143,7 +142,7 @@ export default function ContactSection() {
             <div>
               <h3 className="font-headline text-2xl font-semibold mb-6">Contact Information</h3>
               <div className="space-y-4 text-muted-foreground">
-                  <p><strong>Email:</strong> alif.sakib@example.com</p>
+                  <p><strong>Email:</strong> alifsakib@gmail.com</p>
                   <p><strong>Location:</strong> Dhaka, Bangladesh</p>
                   <p>Feel free to reach out via email or connect with me on social media. I&apos;m always open to discussing new projects and opportunities.</p>
               </div>
