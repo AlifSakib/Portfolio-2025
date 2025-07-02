@@ -11,7 +11,7 @@ export default function VisitorCounter() {
     const fetchCount = async () => {
       try {
         const response = await fetch(
-          "https://api.visitorbadge.io/api/id?path=alifsakib-portfolio"
+          "https://api.visitorbadge.io/api/visitors?path=alifsakib-portfolio"
         );
         
         if (!response.ok) {
@@ -24,7 +24,7 @@ export default function VisitorCounter() {
         const responseText = await response.text();
         if (responseText) {
             const data = JSON.parse(responseText);
-            setCount(data.value);
+            setCount(data.total);
         } else {
             // If response is empty, we can't parse it.
             // Set count to null to avoid breaking the UI.
