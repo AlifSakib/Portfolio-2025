@@ -11,7 +11,7 @@ export default function VisitorCounter() {
     const fetchCount = async () => {
       try {
         const response = await fetch(
-          "https://api.visitorbadge.io/api/visitors?path=alifsakib-portfolio"
+          "https://api.visitorbadge.io/api/id?path=alifsakib-portfolio"
         );
         const data = await response.json();
         setCount(data.value);
